@@ -11,7 +11,7 @@
 
 void main(int argc , char *argv[] ) {
 
-i   /*check arguments */	
+   /*check arguments */	
 	if(argc != 2){
 		printf("invalid arguments-SS\n");
 		return;
@@ -21,38 +21,37 @@ i   /*check arguments */
 		return;
 	}
 
-
-
-
     int status = OUT;
 	FILE *pFile=fopen(argv[1], "r");
     char x;
-    int buflen = 1024;
+    int bufflen = 1024;
     char *wordbuff;
-    wordbuff = (char *) malloc(buflen);
+    wordbuff = (char *) malloc(bufflen);
     int wordlen = 0;
-    memset(wordbuf,0,bufsize);
+    memset(wordbuff,0,bufflen);
 
     while ((x=fgetc(pFile)) != EOF)
     {
-            bzero(wordbuf,wordlen);
-        if(!isalnum(x)){
+      if(isalnum(x) == 0){ /*word ended */
             status = OUT;
+            printf(" %s\n", wordbuff);
+            bzero(wordbuff,wordlen);
         }
         else{
             if(status == OUT){   /*start of a new word */
                 wordlen = 0;
+                status = IN;
+                wordbuff[wordlen] = x;
+                wordlen++;
             }
-            else{   /*still inside a word */
-                if(wordlen >= bufflen
+            else{   /*already inside a word */
+               /* if(wordlen >= bufflen){ realloc(*wordbuff, 1000);}*/
                 wordbuff[wordlen] = x;
                 wordlen++;
             }
         }
-   printf("%c", x);
-
     }	
-        printf("\n");
-		int wordcount = 0;
-        fclose(pFile);
+	int wordcount = 0;
+    fclose(pFile);
+    free(wordbuff);
 }
