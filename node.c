@@ -4,11 +4,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void insert(struct node * root, char * data){
-    struct node *ptr = root;
+void insert(struct node ** root, char * data){
+    struct node *ptr = *root;
     struct node *prev = NULL;
     int comp;
-    struct node * newnode = (struct node *) malloc(sizeof(struct node));
+    struct node * newnode = malloc(sizeof(struct node));
     char * temp;
 
     while (ptr != NULL){
@@ -16,7 +16,6 @@ void insert(struct node * root, char * data){
         if(comp == 0){   /*match found*/
             ptr->count++;
         }
-        printf("fine here");
         prev = ptr;
         ptr = (comp<0) ? ptr->left : ptr->right;
     }
@@ -24,8 +23,8 @@ void insert(struct node * root, char * data){
     strcpy(temp, data);
     newnode->data = temp;
 
-    if( root == NULL){
-        root = newnode;
+    if( *root == NULL){
+        *root = newnode;
         return;
     }
     if(comp < 0){
@@ -38,9 +37,8 @@ void insert(struct node * root, char * data){
 
 
 void traversal(struct node * root){
-    printf("root data: %s\n", root);
-    if(root == NULL){ return;}
+    if(root == NULL){return;}
     traversal(root->left);
-    printf("word: %s count: %d", root->data, root->count);
+    printf("word: %s count: %d\n", root->data, root->count);
     traversal(root->right);
 }

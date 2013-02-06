@@ -35,8 +35,8 @@ void main(int argc , char *argv[] ) {
     {
       if(isalnum(x) == 0){ /*word ended */
             status = OUT;
-            printf(" %s\n", wordbuff);
-/*            insert(*root, *wordbuff);*/
+/*            printf(" %s\n", wordbuff);*/
+            insert(&root, wordbuff);
             bzero(wordbuff,wordlen);
         }
         else{
@@ -55,8 +55,8 @@ void main(int argc , char *argv[] ) {
                 wordlen++;
             }
         }
-    }	
-	int wordcount = 0;
+    }
+    traversal(root);    
     fclose(pFile);
     free(wordbuff);
 }
