@@ -35,3 +35,12 @@ void insert(struct node * root, char * data){
         prev->right = newnode;
     }
 }
+
+
+void traversal(struct node * root){
+    printf("root data: %s\n", root);
+    if(root == NULL){ return;}
+    traversal(root->left);
+    printf("word: %s count: %d", root->data, root->count);
+    traversal(root->right);
+}
