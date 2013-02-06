@@ -1,11 +1,13 @@
 #include "node.h"
 #include <string.h> 
 #include <stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 void insert(struct node * root, char * data){
     struct node *ptr = root;
     struct node *prev = NULL;
-    int comp = strcmp(ptr->data, data);
+    int comp;
     struct node * newnode = (struct node *) malloc(sizeof(struct node));
     char * temp;
 
@@ -14,10 +16,10 @@ void insert(struct node * root, char * data){
         if(comp == 0){   /*match found*/
             ptr->count++;
         }
+        printf("fine here");
         prev = ptr;
         ptr = (comp<0) ? ptr->left : ptr->right;
     }
-
     temp = (char*)malloc(sizeof(char) *( strlen(data)+1));
     strcpy(temp, data);
     newnode->data = temp;

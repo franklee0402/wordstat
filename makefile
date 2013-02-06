@@ -4,10 +4,10 @@ wordstat: wordstat.o node.o
 	gcc wordstat.o node.o -o wordstat
 
 wordstat.o: 
-	gcc -c wordstat.c
+	gcc -c -g wordstat.c
 
 node.o: 
-	gcc -c node.c
+	gcc -c -g node.c
 
 clean: 
 	rm -rf *o wordstat
