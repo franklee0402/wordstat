@@ -33,15 +33,16 @@ void main(int argc , char *argv[] ) {
 
     while ((x=fgetc(pFile)) != EOF)
     {
-      if(isalnum(x) == 0){ /*word ended */
+      if(isalnum(x) ==0){ /*word ended */
             status = OUT;
-/*            printf(" %s\n", wordbuff);*/
-            insert(&root, wordbuff);
-            bzero(wordbuff,wordlen);
+            if(strlen(wordbuff) > 0){/*don't add null character*/
+                insert(&root, wordbuff);
+                bzero(wordbuff,wordlen);
+            }
         }
         else{
             if(status == OUT){   /*start of a new word */
-                if(isalpha(x) == 0){ /*word can't start with number*/
+                if(isalpha(x) == 0){ /*no numbers or spaces*/
                     continue;
                 }
                 wordlen = 0;
@@ -56,7 +57,8 @@ void main(int argc , char *argv[] ) {
             }
         }
     }
-    traversal(root);    
+    printf("Word \t Total Occurances \t Versions \n");
+    traversal(root);
     fclose(pFile);
     free(wordbuff);
 }

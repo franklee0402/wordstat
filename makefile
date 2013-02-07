@@ -1,3 +1,5 @@
+.PHONY: wordstat wordstat.o node.o
+
 all: wordstat
 
 wordstat: wordstat.o node.o
